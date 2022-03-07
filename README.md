@@ -1,6 +1,6 @@
 # UVA Biocomplexity Capstone Project
 ## Design of an Explainable Machine Learning Classifier to Differentiate 
-Jainam Modh (jhm3ab)
+Jainam Modh (jhm3ab)  
 Advisors: Andrew Warren, Chunghong Mao
 ### Project Goals
 ### Methods
