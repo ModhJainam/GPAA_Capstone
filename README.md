@@ -1,7 +1,8 @@
-# UVA Biocomplexity Capstone Project
-## Design of an Explainable Machine Learning Classifier to Differentiate 
+# GPAA Capstone Project
+## Design of an Explainable Machine Learning Classifier to Differentiate Transcriptomic Profiles of Atherosclerosis
 Jainam Modh (jhm3ab)  
-Advisors: Andrew Warren, Chunghong Mao
+Advisors: Andrew Warren, Chunghong Mao  
+UVA Biocomplexity Institute
 ### Project Goals
 ### Methods
 - Preprocessing
