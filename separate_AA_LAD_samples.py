@@ -9,3 +9,5 @@ LAD = gpaa.loc[gpaa['sample_id'].isin(LAD_meta['UVA_sample_id'])]
 AA = gpaa.loc[gpaa['sample_id'].isin(AA_meta['UVA_sample_id'])]
 LAD.to_csv("GPAA_samples_LAD_batches0-15_FPKM.csv", index = False)
 AA.to_csv("GPAA_samples_AA_batches0-15_FPKM.csv", index = False)
+LAD_meta.tocsv("GPAA_LAD_batches0-15_metadata.csv", index = False)
+AA_meta.tocsv("GPAA_AA_batches0-15_metadata.csv", index = False)
