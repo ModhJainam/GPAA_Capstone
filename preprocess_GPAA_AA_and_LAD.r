@@ -1,11 +1,12 @@
+install.packages(c("dplyr", "caret", "readr", "stringr"))
 library(dplyr)
 library(caret)
-library(dprep)
+#library(dprep)
 library(readr)
 library(stringr)
 
-AA_genomic <- read_csv("/gpfs/gpfs0/project/gpaa/machine_learning/may_2021_repo/preprocessing/GPAA_AA_genomic_b13.csv")
-LAD_genomic <- read_csv("/gpfs/gpfs0/project/gpaa/machine_learning/may_2021_repo/preprocessing/GPAA_LAD_genomic_b13.csv")
+AA_genomic <- read_csv("/project/gpaa/machine_learning/jainam_capstone/GPAA_samples_AA_batches0-15_FPKM.csv")
+LAD_genomic <- read_csv("/project/gpaa/machine_learning/jainam_capstone/GPAA_samples_LAD_batches0-15_FPKM.csv")
 
 nzv_AA <- nearZeroVar(AA_genomic)
 nzv_LAD <- nearZeroVar(LAD_genomic)
@@ -22,39 +23,16 @@ highcorrelations_LAD <- findCorrelation(correlations_LAD, cutoff = .80)
 AA_genomic.lessnzv.no_sampleid.lesscor <- AA_genomic.lessnzv.no_sampleid[,-highcorrelations_AA]
 LAD_genomic.lessnzv.no_sampleid.lesscor <- LAD_genomic.lessnzv.no_sampleid[,-highcorrelations_LAD]
 
-AA_genomic.lessnzv.no_sampleid.lesscor.norm <- znorm(AA_genomic.lessnzv.no_sampleid.lesscor)
-LAD_genomic.lessnzv.no_sampleid.lesscor.norm <- znorm(LAD_genomic.lessnzv.no_sampleid.lesscor)
+#AA_genomic.lessnzv.no_sampleid.lesscor.norm <- znorm(AA_genomic.lessnzv.no_sampleid.lesscor)
+#LAD_genomic.lessnzv.no_sampleid.lesscor.norm <- znorm(LAD_genomic.lessnzv.no_sampleid.lesscor)
+
+AA_genomic.lessnzv.no_sampleid.lesscor.norm <- scale(AA_genomic.lessnzv.no_sampleid.lesscor)
+LAD_genomic.lessnzv.no_sampleid.lesscor.norm <- scale(LAD_genomic.lessnzv.no_sampleid.lesscor)
 
 rownames(AA_genomic.lessnzv.no_sampleid.lesscor.norm) = AA_genomic$sample_id
 rownames(LAD_genomic.lessnzv.no_sampleid.lesscor.norm) = LAD_genomic$sample_id
 
-write.csv(AA_genomic.lessnzv.no_sampleid.lesscor.norm, "GPAA_AA_genomic_b13_preprocessed.csv", row.names=TRUE)
-write.csv(LAD_genomic.lessnzv.no_sampleid.lesscor.norm, "GPAA_LAD_genomic_b13_preprocessed.csv", row.names=TRUE)
+write.csv(AA_genomic.lessnzv.no_sampleid.lesscor.norm, "GPAA_AA_samples_preprocessed.csv", row.names=TRUE)
+write.csv(LAD_genomic.lessnzv.no_sampleid.lesscor.norm, "GPAA_LAD_samples_preprocessed.csv", row.names=TRUE)
 
 ##############################################################################################
-
-AA_genomic.lessnzv.no_sampleid.norm <- znorm(AA_genomic.lessnzv.no_sampleid)
-LAD_genomic.lessnzv.no_sampleid.norm <- znorm(LAD_genomic.lessnzv.no_sampleid)
-
-rownames(AA_genomic.lessnzv.no_sampleid.norm) = AA_genomic$sample_id
-rownames(LAD_genomic.lessnzv.no_sampleid.norm) = LAD_genomic$sample_id
-
-asr_AA_DE_genes = readLines('/gpfs/gpfs0/project/gpaa/machine_learning/may_2021_repo/differential_expression/asr_AA_DE_genes.txt')
-asr_LAD_DE_genes = readLines('/gpfs/gpfs0/project/gpaa/machine_learning/may_2021_repo/differential_expression/asr_LAD_DE_genes.txt')
-noconfound_AA_DE_genes = readLines('/gpfs/gpfs0/project/gpaa/machine_learning/may_2021_repo/differential_expression/noconfound_AA_DE_genes.txt')
-noconfound_LAD_DE_genes = readLines('/gpfs/gpfs0/project/gpaa/machine_learning/may_2021_repo/differential_expression/noconfound_LAD_DE_genes.txt')
-
-asr_AA_DE_genes<-str_extract(string=asr_AA_DE_genes, pattern="[^|]+")
-asr_LAD_DE_genes<-str_extract(string=asr_LAD_DE_genes, pattern="[^|]+")
-noconfound_AA_DE_genes<-str_extract(string=noconfound_AA_DE_genes, pattern="[^|]+")
-noconfound_LAD_DE_genes<-str_extract(string=noconfound_LAD_DE_genes, pattern="[^|]+")
-
-asr_AA_towrite = AA_genomic.lessnzv.no_sampleid.norm[names(AA_genomic.lessnzv.no_sampleid.norm)[names(AA_genomic.lessnzv.no_sampleid.norm) %in% asr_AA_DE_genes]]
-asr_LAD_towrite = LAD_genomic.lessnzv.no_sampleid.norm[names(LAD_genomic.lessnzv.no_sampleid.norm)[names(LAD_genomic.lessnzv.no_sampleid.norm) %in% asr_LAD_DE_genes]]
-noconfound_AA_towrite = AA_genomic.lessnzv.no_sampleid.norm[names(AA_genomic.lessnzv.no_sampleid.norm)[names(AA_genomic.lessnzv.no_sampleid.norm) %in% noconfound_AA_DE_genes]]
-noconfound_LAD_towrite = LAD_genomic.lessnzv.no_sampleid.norm[names(LAD_genomic.lessnzv.no_sampleid.norm)[names(LAD_genomic.lessnzv.no_sampleid.norm) %in% noconfound_LAD_DE_genes]]
-
-write.csv(asr_AA_towrite, "GPAA_AA_genomic_b13_preprocessed_asr_DE_genes.csv", row.names=TRUE)
-write.csv(asr_LAD_towrite, "GPAA_LAD_genomic_b13_preprocessed_asr_DE_genes.csv", row.names=TRUE)
-write.csv(noconfound_AA_towrite, "GPAA_AA_genomic_b13_preprocessed_noconfound_DE_genes.csv", row.names=TRUE)
-write.csv(noconfound_LAD_towrite, "GPAA_LAD_genomic_b13_preprocessed_noconfound_DE_genes.csv", row.names=TRUE)
