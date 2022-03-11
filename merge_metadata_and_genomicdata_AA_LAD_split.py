@@ -11,6 +11,7 @@ genomic_df = pd.read_csv(genomic_data_AA).rename(columns={"Unnamed: 0": "sample_
 metadata_df = pd.read_csv(metadata_AA)
 
 merged = metadata_df.merge(genomic_df, how='inner', left_on = "UVA_sample_id", right_on = "sample_id")
+merged["binary_pathology"] = np.where(merged['pathology (assigned category)'].isin(['nl', 'fs']), 0, 1)
 merged.to_csv("AA_labeled_batches0-15.csv", index=False)
 
 '''
@@ -36,6 +37,7 @@ metadata_df = pd.read_csv(metadata_LAD)
 
 
 merged = metadata_df.merge(genomic_df, how='inner', left_on = "UVA_sample_id", right_on = "sample_id")
+merged["binary_pathology"] = np.where(merged['pathology (assigned category)'].isin(['nl', 'fs']), 0, 1)
 merged.to_csv("LAD_labeled_batches0-15.csv", index=False)
 
 '''
