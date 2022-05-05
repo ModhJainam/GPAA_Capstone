@@ -1,0 +1,5 @@
+/project/gpaa/output/GPAAII_batch7-16_stringtie
+/project/biocomplexity/gpaa/output/AA_batch12_protein-coding-biotype-only_known_stranded_20201008/work/stringtie
+/project/biocomplexity/gpaa/output/AA-batch6_protein-coding-biotype-only_known_stranded_20201014/work/stringtie
+/project/biocomplexity/gpaa/output/AA_batch8_protein-coding-biotype-only_known_stranded_20201012/work/stringtie
+/project/biocomplexity/gpaa/output/combined_FPFCFS_protein-coding-biotype-only_known_20200115/stringtie

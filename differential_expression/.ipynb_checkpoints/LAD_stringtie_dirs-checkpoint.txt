@@ -1,0 +1,1 @@
+/project/gpaa/output/GPAAII_batch7-16_stringtie

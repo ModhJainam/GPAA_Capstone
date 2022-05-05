@@ -1,12 +1,12 @@
-install.packages(c("dplyr", "caret", "readr", "stringr"))
+#install.packages(c("dplyr", "caret", "readr", "stringr"))
 library(dplyr)
 library(caret)
 #library(dprep)
 library(readr)
 library(stringr)
 
-AA_genomic <- read_csv("/project/gpaa/machine_learning/jainam_capstone/GPAA_samples_AA_batches0-15_FPKM.csv")
-LAD_genomic <- read_csv("/project/gpaa/machine_learning/jainam_capstone/GPAA_samples_LAD_batches0-15_FPKM.csv")
+AA_genomic <- read_csv("/project/gpaa/machine_learning/jainam_capstone/preprocessing/GPAA_samples_AA_batches0-16_FPKM.csv")
+LAD_genomic <- read_csv("/project/gpaa/machine_learning/jainam_capstone/preprocessing/GPAA_samples_LAD_batches0-16_FPKM.csv")
 
 nzv_AA <- nearZeroVar(AA_genomic)
 nzv_LAD <- nearZeroVar(LAD_genomic)
