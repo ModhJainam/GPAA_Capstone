@@ -1,4 +1,0 @@
-  File "feature_select_AA.py", line 197
-    LASSO_to_write = ranks2 np.savetxt("/project/gpaa/machine_learning/jainam_capstone/feature_selection/feature_selection_results_new/top_240_indices_AA_LASSO_split_"+str(split)+".csv", ranks2.argsort()[-240:][::-1], delimiter=",")
-                            ^
-SyntaxError: invalid syntax
