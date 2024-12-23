@@ -24,5 +24,4 @@ Atherosclerosis and coronary artery disease (CAD) account for at least 30% of al
 	- Gene Sets: GO Biological Processes
 - UMAP Dimensionality Reduction and Supervised Clustering
 	- Correlate model results with pathology scores
-### Results
 
